@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authentication.Cookies;
 using UserInterface.Application.Common;
+using UserInterface.Application.Controllers;
 using UserInterface.Application.Models;
 using UserInterface.Application.Services.Implementations;
 using UserInterface.Application.Services.Implemettions;
@@ -21,6 +22,9 @@ namespace UserInterface.Application.Extensions
             services.AddScoped<IHttpService, HttpService>();
             services.AddScoped<ITokenService, TokenService>();
             services.AddScoped<IClientServices<ApplicationUser>, ClientServices<ApplicationUser>>();
+            services.AddScoped<IClientServices<Chapter>,ClientServices<Chapter>>();
+            services.AddScoped<IClientServices<Topic>,ClientServices<Topic>>();
+            services.AddScoped<IClientServices<Questions>,ClientServices<Questions>>();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)

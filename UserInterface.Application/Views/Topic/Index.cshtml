@@ -1,0 +1,168 @@
+﻿@model UserInterface.Application.Models.Topic
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "_AdminLayout";
+}
+
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="header-icon">
+            <i class="fa fa-comments"></i>
+        </div>
+        <div class="header-title">
+            <h1>Topic</h1>
+            <small>Topic List</small>
+        </div>
+    </section>
+    <!-- Main content -->
+    <section class="content">
+        <div class="row">
+            <div class="col-lg-12 pinpin">
+                <div class="card lobicard" data-sortable="true">
+                    <div class="card-header">
+                        <div class="card-title custom_title">
+                            <h4>Add Topic</h4>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="btn-group d-flex" role="group">
+                            <div class="buttonexport" id="btn-Create">
+                                <a class="btn text-white btn-add" data-toggle="modal" data-target="#ModelCreateAndEdit">
+                                    <i class="fa fa-plus"></i> Add Topic
+                                </a>
+                            </div>
+                        </div>
+                        <div class="table-responsive">
+                            <table id="UsersDataTable" class="table table-bordered table-striped table-hover">
+                                <thead class="back_table_color">
+                                    <tr class="info">
+                                        <th>Topic Name</th>
+                                        <th>Under Chapter Name</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <!-- Load Table Body from Jquery src="~/js/authentication/applicationusers.js" -->
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Customer Modal1 -->
+<div class="modal fade" id="ModelCreateAndEdit" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header modal-header-primary">
+                <h3><i class="fa fa-user m-r-5"></i> Update Customer</h3>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <form id="createAndUpdateForm">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <div class="row">
+                                <div class="col-md-6 form-group">
+                                    <label asp-for="title" class="control-label"></label>
+                                    <input asp-for="title" placeholder="Customer Name" class="form-control" name="title" id="title" />
+                                    <span asp-validation-for="title" class="text-danger"></span>
+                                </div>
+
+                                <div class="col-md-6 form-group">
+                                    <label asp-for="Chapterid"></label>
+                                    <select class="form-control" asp-for="Chapterid" id="ChapterDropdown">
+                                        <option value="">Select Chapter</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-12 form-group user-form-group">
+                                    <div class="float-right">
+                                        <button data-dismiss="modal" class="btn btn-danger btn-sm">Cancel</button>
+                                        <button id="btnSave" type="submit" class="btn btn-add btn-sm">Save</button>
+                                        <button id="btnUpdate" type="submit" class="btn btn-add btn-sm">Update</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- Customer Modal2 -->
+<div class="modal fade" id="DeleteModel" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header modal-header-primary">
+                <h3><i class="fa fa-user m-r-5"></i> Delete Customer</h3>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div id="deleteForm" class="form-horizontal">
+                            <div class="row">
+                                <div class="col-md-12 form-group user-form-group">
+                                    <label class="control-label">Delete Customer</label>
+                                    <div class="float-right">
+                                        <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">NO</button>
+                                        <button type="button" id="btnDelete" class="btn btn-add btn-sm">YES</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/js/topic/topic.js"></script>
+}

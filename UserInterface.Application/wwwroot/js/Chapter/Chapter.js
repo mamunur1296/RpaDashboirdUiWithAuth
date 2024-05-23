@@ -1,27 +1,27 @@
 ﻿$(document).ready(async function () {
     debugger
     await GetAllList();
-    
+
 });
 async function GetAllList() {
     debugger
     try {
-        const Users = await $.ajax({
-            url: '/ApplicationUser/GetAll',
+        const Chapters = await $.ajax({
+            url: '/Chapter/GetAll',
             type: 'get',
             dataType: 'json',
             contentType: 'application/json;charset=utf-8'
         });
-        if (Users && Users.length > 0) {
-            onSuccess(Users);
+        if (Chapters && Chapters.length > 0) {
+            onSuccess(Chapters);
         }
     } catch (error) {
         console.log('Error:', error);
     }
 }
-function onSuccess(Users) {
+function onSuccess(Chapters) {
     debugger
-    if (Users.length > 0) {
+    if (Chapters.length > 0) {
         if (typeof $.fn.DataTable !== 'undefined' && $.fn.DataTable.isDataTable('#UsersDataTable')) {
             $('#UsersDataTable').DataTable().destroy();
         }
@@ -32,30 +32,18 @@ function onSuccess(Users) {
             searching: true,
             ordering: true,
             paging: true,
-            data: Users,
+            data: Chapters,
             columns: [
                 {
-                    data: 'fullName',
+                    data: 'title',
                     render: function (data, type, row, meta) {
                         return data;
                     }
                 },
                 {
-                    data: 'userName',
-                    render: function (data, type, row, meta) {
-                        return row.userName;
-                    }
-                },
-                {
-                    data: 'email',
-                    render: function (data, type, row, meta) {
-                        return row.email;
-                    }
-                },
-                {
                     data: null,
                     render: function (data, type, row, meta) {
-                        return '<button class="btn btn-add btn-sm ms-1" onclick="editCompany(\'' + row.id + '\')"><i class="fa fa-pencil"></i></button>' + ' ' +
+                        return '<button class="btn btn-add btn-sm ms-1" onclick="editItem(\'' + row.id + '\')"><i class="fa fa-pencil"></i></button>' + ' ' +
                             '<button class="btn btn-info btn-sm ms-1" onclick="showDetails(\'' + row.id + '\')"><i class="fa fa-info-circle"></i></button>' + ' ' +
                             '<button class="btn btn-danger btn-sm ms-1" onclick="deleteItem(\'' + row.id + '\')"><i class="fa fa-trash-o"></i></button>';
                     }
@@ -72,27 +60,21 @@ $('#btn-Create').click(function () {
     //$('#DeleteModel').modal('show');
     $('#btnSave').show();
     $('#btnUpdate').hide();
+    $('#createAndUpdateForm')[0].reset();
 });
 $(document).ready(function () {
     // Initialize form validation
-  
+
 });
 
 // Initialize form validation
 $('#createAndUpdateForm').validate({
     rules: {
-        FullName: { required: true },
-        UserName: { required: true },
-        Email: { required: true, email: true },
-        Password: { required: true },
-        ConfirmationPassword: { required: true, equalTo: "#Password" }
+        title: { required: true },
     },
     messages: {
-        FullName: { required: "Customer Name is required" },
-        UserName: { required: "User Name is required" },
-        Email: { required: "Email is required", email: "Please enter a valid email address" },
-        Password: { required: "Password is required" },
-        ConfirmationPassword: { required: "Confirmation Password is required", equalTo: "Passwords do not match" }
+        title: { required: "Title Name is required" },
+       
     },
     errorElement: 'div',
     errorPlacement: function (error, element) {
@@ -127,7 +109,7 @@ $('#btnSave').click(async function (e) {
         var formData = $('#createAndUpdateForm').serialize();
         try {
             const response = await $.ajax({
-                url: '/ApplicationUser/Create',
+                url: '/Chapter/Create',
                 type: 'post',
                 contentType: 'application/x-www-form-urlencoded',
                 data: formData
@@ -150,6 +132,99 @@ $('#btnSave').click(async function (e) {
     }
 });
 
+// Edit / Update Sections 
+
+async function editItem(id) {
+    console.log("Edit company with id:", id);
+
+    // Reset form validation
+    debugger
+    $('#createAndUpdateForm')[0].reset();
+    try {
+        const data = await $.ajax({
+            url: '/Chapter/GetById/' + id,
+            type: 'get',
+            dataType: 'json',
+            contentType: 'application/json;charset=utf-8'
+        });
+
+        // Populate form fields with company data
+        $('#btnSave').hide();
+        $('#btnUpdate').show();
+        $('#title').val(data.title);
+        debugger
+
+        // Show modal for editing
+        $('#ModelCreateAndEdit').modal('show');
+        // Update button click event handler
+        $('#btnUpdate').click(async function (e) {
+            debugger
+            e.preventDefault();
+            update(id);
+        });
+    } catch (error) {
+        console.log('Error:', error);
+    }
+}
+
+
+async function update(id) {
+    debugger
+    if ($('#createAndUpdateForm').valid()) {
+        const formData = $('#createAndUpdateForm').serialize();
+        console.log(formData);
+        try {
+            const response = await $.ajax({
+                url: '/Chapter/Update/' + id,
+                type: 'put',
+                contentType: 'application/x-www-form-urlencoded',
+                data: formData
+            });
+
+            $('#ModelCreateAndEdit').modal('hide');
+            if (response) {
+                // Show success message
+                $('#successMessage').text('Your company was successfully updated.');
+                $('#successMessage').show();
+                // Reset the form
+                $('#createAndUpdateForm')[0].reset();
+                // Update the company list
+                await GetAllList();
+            }
+        } catch (error) {
+            console.log('Error:', error);
+            // Show error message
+            $('#errorMessage').text('An error occurred while updating the company.');
+            $('#errorMessage').show();
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Delete Sections 
+
+
+
+
 function deleteItem(id) {
     debugger;
     console.log(id);
@@ -157,7 +232,7 @@ function deleteItem(id) {
 
     $('#btnDelete').click(function () { // Remove previous click event handlers
         $.ajax({
-            url: '/ApplicationUser/Delete',
+            url: '/Chapter/Delete',
             type: 'POST',
             data: { id: id },
             success: function (response) {
