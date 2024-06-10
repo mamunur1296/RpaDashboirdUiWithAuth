@@ -18,7 +18,7 @@ async function GetAllList() {
             dataType: 'json',
             contentType: 'application/json;charset=utf-8'
         });
-        if (Topics && Topics.length > 0) {
+        if (Topics) {
             onSuccess(Topics,Chapters);
         }
     } catch (error) {
@@ -31,7 +31,7 @@ async function GetAllList() {
 function onSuccess(Topics, Chapters) {
     debugger
 
-    if (Topics && Chapters) {
+    if (Topics) {
         // Convert users array to a map for easy lookup
         var ChapterMap = {};
         Chapters.forEach(function (Chapter) {
@@ -93,6 +93,8 @@ $('#btn-Create').click(function () {
     $('#btnUpdate').hide();
     $('#createAndUpdateForm')[0].reset();
     populateChapterDropdown();
+    $('#lebelUpdate').hide();
+    $('#lebelAdd').show();
 });
 
 
@@ -171,7 +173,7 @@ $('#btnSave').click(async function (e) {
 
             if (response) {
                 // Show success message
-                $('#successMessage').text('Your company was successfully saved.');
+                $('#successMessage').text('Your Topic successfully saved.');
                 $('#successMessage').show();
 
                 // Hide the modal after successful save using jQuery's `modal('hide')`
@@ -190,6 +192,8 @@ $('#btnSave').click(async function (e) {
 
 async function editItem(id) {
     console.log("Edit company with id:", id);
+    $('#lebelUpdate').show();
+    $('#lebelAdd').hide();
     populateChapterDropdown();
     // Reset form validation
     debugger
@@ -239,7 +243,7 @@ async function update(id) {
             $('#ModelCreateAndEdit').modal('hide');
             if (response) {
                 // Show success message
-                $('#successMessage').text('Your company was successfully updated.');
+                $('#successMessage').text('Your Topic successfully updated.');
                 $('#successMessage').show();
                 // Reset the form
                 $('#createAndUpdateForm')[0].reset();
@@ -249,7 +253,7 @@ async function update(id) {
         } catch (error) {
             console.log('Error:', error);
             // Show error message
-            $('#errorMessage').text('An error occurred while updating the company.');
+            $('#errorMessage').text('An error occurred while updating the Topic.');
             $('#errorMessage').show();
         }
     }
@@ -292,6 +296,8 @@ function deleteItem(id) {
             data: { id: id },
             success: function (response) {
                 $('#DeleteModel').modal('hide'); // Hide the modal first
+                $('#successMessage').text('Your Topic successfully Delete .');
+                $('#successMessage').show();
             },
             error: function (xhr, status, error) {
                 console.log(error);

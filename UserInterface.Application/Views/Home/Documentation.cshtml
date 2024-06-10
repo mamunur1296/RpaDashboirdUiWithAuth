@@ -1,0 +1,221 @@
+﻿@{
+    ViewData["Title"] = "Documentation";
+}
+
+
+<section class="container mt-4">
+    <div class="row ">
+        <div class="col-md-9 my-3 ">
+           <div class="row mb-3">
+                <h5>All Chapter </h5>
+                
+                <div class="col-md-12" id="chapter-container">
+                    @* <button type="button" class="btn btn-secondary mb-1">Array Array Array <span class="badge bg-light text-dark">1653</span></button> *@
+                    
+               </div>
+                
+                
+           </div>
+            <div class="row mb-3">
+                <h5>All Topic </h5>
+                <div class="col-md-12" id="Topic-container">
+                    @* <button type="button" class="btn btn-secondary mb-1">Array Array Array <span class="badge bg-light text-dark">1653</span></button> *@
+                </div>
+            </div>
+            <div class="row mb-3">
+                <h5>All Qussen List </h5>
+                <div class="col-md-12">
+                    <table id="QuessainDataTable" >
+                        <thead>
+                            <tr>
+                                <th>Sr No</th>
+                                <th>Title</th>
+                                <th>Answer</th>
+                                <th>Details</th>
+                            </tr>
+                        </thead>
+                        
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 ">
+            add Other Thinks
+        </div>
+    </div>
+
+</section>
+
+<section class="container">
+    <div class="modal fade" id="ansModel" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="title"></h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="body">
+                    <p id="answers"></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    <script src="~/js/documentation/documentation.js"></script>
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@* <div class="d-flex flex-wrap align-items-center pb-3">
+    <div class="btn-group me-2" role="group" aria-label="Topics">
+        <button type="button" class="btn btn-secondary">Array <span class="badge bg-light text-dark">1653</span></button>
+        <button type="button" class="btn btn-secondary">String <span class="badge bg-light text-dark">700</span></button>
+        <button type="button" class="btn btn-secondary">Hash Table <span class="badge bg-light text-dark">599</span></button>
+        <button type="button" class="btn btn-secondary">Dynamic Programming <span class="badge bg-light text-dark">501</span></button>
+        <button type="button" class="btn btn-secondary">Math <span class="badge bg-light text-dark">499</span></button>
+        <button type="button" class="btn btn-secondary">Sorting <span class="badge bg-light text-dark">400</span></button>
+        <button type="button" class="btn btn-secondary">Greedy <span class="badge bg-light text-dark">362</span></button>
+    </div>
+    <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="expandDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+            Expand
+        </button>
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="expandDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+            Collaps
+        </button>
+
+    </div>
+</div>
+<div class="row mb-3">
+    <div class="col-md-3">
+        <input type="text" class="form-control" id="searchBox" placeholder="Search...">
+    </div>
+    <div class="col-md-3">
+        <select class="form-select" id="filterSelect">
+            <option selected>All Topics</option>
+            <option value="1">Algorithm</option>
+            <option value="2">Database</option>
+            <option value="3">Shell</option>
+            <option value="4">Concurrency</option>
+        </select>
+    </div>
+    <div class="col-md-3">
+        <select class="form-select" id="difficultySelect">
+            <option selected>All Difficulties</option>
+            <option value="1">Easy</option>
+            <option value="2">Medium</option>
+            <option value="3">Hard</option>
+        </select>
+    </div>
+    <div class="col-md-3">
+        <button class="btn btn-primary" id="filterButton">Filter</button>
+    </div>
+</div>
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Title</th>
+                <th scope="col">Solution</th>
+                <th scope="col">Difficulty</th>
+                <th scope="col">Frequency</th>
+                <th scope="col">Programming</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="row">Id</th>
+                <td>Title</td>
+                <td>Solution</td>
+                <td>Difficulty</td>
+                <td>Frequency</td>
+                <td>Programming</td>
+            </tr>
+
+            <tr>
+                <th scope="row">Id</th>
+                <td>Title</td>
+                <td>Solution</td>
+                <td>Difficulty</td>
+                <td>Frequency</td>
+                <td>Programming</td>
+            </tr>
+            <tr>
+                <th scope="row">Id</th>
+                <td>Title</td>
+                <td>Solution</td>
+                <td>Difficulty</td>
+                <td>Frequency</td>
+                <td>Programming</td>
+            </tr>
+            <tr>
+                <th scope="row">Id</th>
+                <td>Title</td>
+                <td>Solution</td>
+                <td>Difficulty</td>
+                <td>Frequency</td>
+                <td>Programming</td>
+            </tr>
+
+        </tbody>
+    </table>
+</div> *@
+
+
+</div>

@@ -24,7 +24,7 @@ async function GetAllList() {
             dataType: 'json',
             contentType: 'application/json;charset=utf-8'
         });
-        if (Questions && Questions.length > 0) {
+        if (Questions) {
             onSuccess(Questions,Topics, Chapters);
         }
     } catch (error) {
@@ -37,7 +37,7 @@ async function GetAllList() {
 function onSuccess(Questions,Topics, Chapters) {
     debugger
 
-    if (Questions && Topics && Chapters) {
+    if (Questions) {
         // Convert users array to a map for easy lookup
         var ChapterMap = {};
         Chapters.forEach(function (Chapter) {
@@ -117,6 +117,8 @@ $('#btn-Create').click(function () {
     $('#btnSave').show();
     $('#btnUpdate').hide();
     $('#createAndUpdateForm')[0].reset();
+    $('#lebelUpdate').hide();
+    $('#lebelAdd').show();
     populateChapterDropdown();
     populateTopicDropdown()
 });
@@ -225,7 +227,7 @@ $('#btnSave').click(async function (e) {
 
             if (response) {
                 // Show success message
-                $('#successMessage').text('Your company was successfully saved.');
+                $('#successMessage').text('Your Questions successfully saved.');
                 $('#successMessage').show();
 
                 // Hide the modal after successful save using jQuery's `modal('hide')`
@@ -244,6 +246,8 @@ $('#btnSave').click(async function (e) {
 
 async function editItem(id) {
     console.log("Edit company with id:", id);
+    $('#lebelUpdate').show();
+    $('#lebelAdd').hide();
     await populateChapterDropdown();
     await populateTopicDropdown()
     // Reset form validation
@@ -296,7 +300,7 @@ async function update(id) {
             $('#ModelCreateAndEdit').modal('hide');
             if (response) {
                 // Show success message
-                $('#successMessage').text('Your company was successfully updated.');
+                $('#successMessage').text('Your Questions successfully updated.');
                 $('#successMessage').show();
                 // Reset the form
                 $('#createAndUpdateForm')[0].reset();
@@ -349,6 +353,8 @@ function deleteItem(id) {
             data: { id: id },
             success: function (response) {
                 $('#DeleteModel').modal('hide'); // Hide the modal first
+                $('#successMessage').text('Your Questions successfully Delete.');
+                $('#successMessage').show();
             },
             error: function (xhr, status, error) {
                 console.log(error);

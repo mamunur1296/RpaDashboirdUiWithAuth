@@ -18,6 +18,11 @@ namespace UserInterface.Application.Controllers
         {
             return View();
         }
+        [HttpGet]
+        public IActionResult Documentation()
+        {
+            return View();
+        }
 
         public IActionResult Privacy()
         {
